@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "argon-dashboard-angular": {
+    "geo_frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -22,14 +22,17 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "allowedCommonJsDependencies": ["chart.js"],
+            "allowedCommonJsDependencies": [
+              "chart.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/argon.scss"
+              "src/assets/scss/argon.scss",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.min.js",
@@ -61,8 +64,8 @@
               ]
             },
             "development": {
-             "buildOptimizer": false,
-             "optimization": {
+              "buildOptimizer": false,
+              "optimization": {
                 "scripts": true,
                 "styles": {
                   "minify": false,
@@ -70,29 +73,29 @@
                 },
                 "fonts": true
               },
-             "outputHashing": "all",
-           }
+              "outputHashing": "all"
+            }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "argon-dashboard-angular:build"
+            "browserTarget": "geo_frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "argon-dashboard-angular:build:production"
+              "browserTarget": "geo_frontend:build:production"
             },
             "development": {
-              "browserTarget": "argon-dashboard-angular:build:development"
+              "browserTarget": "geo_frontend:build:development"
             }
           },
-          "defaultConfiguration": "production",
+          "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "argon-dashboard-angular:build"
+            "browserTarget": "geo_frontend:build"
           }
         },
         "test": {
@@ -108,7 +111,12 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "src/assets"
+              }
             ]
           }
         },
@@ -126,7 +134,7 @@
         }
       }
     },
-    "argon-dashboard-angular-e2e": {
+    "geo_frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -134,11 +142,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "argon-dashboard-angular:serve"
+            "devServerTarget": "geo_frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "argon-dashboard-angular:serve:production"
+              "devServerTarget": "geo_frontend:serve:production"
             }
           }
         },
@@ -154,7 +162,7 @@
       }
     }
   },
-  "defaultProject": "argon-dashboard-angular",
+  "defaultProject": "geo_frontend",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"
